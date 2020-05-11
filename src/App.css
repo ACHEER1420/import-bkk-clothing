@@ -1,0 +1,12 @@
+.App {
+  font-family: 'Open Sans Condensed', 'Open Sans';
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+a:hover {
+  color: black;
+}
