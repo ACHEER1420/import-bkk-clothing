@@ -3,17 +3,23 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
+import Auth from './pages/auth/auth.component';
+import Shop from './pages/shop/shop.component';
 
-import './App.css';
+import './App.scss';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <div className='App'>
         <Header />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-        </Switch>
+        <div className='app-wrapper'>
+          <Switch>
+            <Route exact path='/' component={HomePage} />
+            <Route exact path='/shop' component={Shop} />
+            <Route exact path='/auth' component={Auth} />
+          </Switch>
+        </div>
       </div>
     );
   }

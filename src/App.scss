@@ -1,5 +1,7 @@
 .App {
-  
+  & .app-wrapper {
+    padding-top: 100px;
+  }
 }
 
 a {
