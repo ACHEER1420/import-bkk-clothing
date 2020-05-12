@@ -7,8 +7,17 @@
 a {
   text-decoration: none;
   color: gray;
+  
+  &:hover{
+    color: black;
+  }
 }
 
-a:hover {
-  color: black;
+.option {
+  @extend a;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
 }

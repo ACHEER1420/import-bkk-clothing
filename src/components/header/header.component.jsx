@@ -1,11 +1,13 @@
 import React from 'react';
 
+import { auth } from '../../firebase/firebase.util';
+
 import { ReactComponent as Logo } from '../../logo.svg';
 import { Link } from 'react-router-dom';
 
 import './header.style.scss';
 
-const Header = () => (
+const Header = ({ currentUser }) => (
   <div className='header'>
     <Link to='/' className='logo-container'>
       <Logo className='logo' />
@@ -17,9 +19,17 @@ const Header = () => (
       <Link to='/shop' className='option'>
         Contact
       </Link>
-      <Link to='/auth' className='option'>
-        Log in
-      </Link>
+      <div>
+        {currentUser ? (
+          <div className='option' onClick={() => auth.signOut()}>
+            Sign Out
+          </div>
+        ) : (
+          <Link className='option' to='/auth'>
+            Sign In
+          </Link>
+        )}
+      </div>
     </div>
   </div>
 );
