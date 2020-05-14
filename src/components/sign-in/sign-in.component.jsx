@@ -2,7 +2,8 @@ import React from 'react';
 
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import {singInWithGoogle} from '../../firebase/firebase.util.js';
+import { Link } from 'react-router-dom';
+import { singInWithGoogle } from '../../firebase/firebase.util.js';
 
 import './sign-in.styles.scss';
 
@@ -30,7 +31,9 @@ class SignIn extends React.Component {
   render() {
     return (
       <div className='sign-in'>
-        <h2>Already have an account?</h2>
+        <h2>
+          Don't have an account yet? <Link to='/register'>Register</Link>
+        </h2>
         <p>Please sign in with email and password</p>
         <form onSubmit={this.handleSubmit}>
           <FormInput
@@ -50,7 +53,8 @@ class SignIn extends React.Component {
           <div className='buttons'>
             <CustomButton>Sign In</CustomButton>
             <CustomButton
-              isGoogleSignIn={true}
+              type='button'
+              isGoogleSignIn
               onClick={singInWithGoogle}
             >
               Sing in with Google

@@ -5,7 +5,7 @@ import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import Auth from './pages/auth/auth.component';
 import Shop from './pages/shop/shop.component';
-import { auth } from './firebase/firebase.util';
+import { auth, createUserProfileDocument } from './firebase/firebase.util';
 
 import './App.scss';
 
@@ -21,10 +21,31 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
-
-      console.log(this.state.currentUser);
+    // check weather or not user arleady signin ?
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        // userRef.onSnapshot((snapShot) => {
+        //   this.setState({
+        //     currentUser: {
+        //       id: snapShot.id,
+        //       ...snapShot.data(),
+        //     },
+        //   });
+        // });
+        try {
+          const snapShot = await userRef.get();
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+        } catch (error) {}
+      } else {
+        console.log('check when else of component did mount will be fired');
+        this.setState({ currentUser: null });
+      }
     });
   }
 
@@ -40,7 +61,8 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/' component={HomePage} />
             <Route exact path='/shop' component={Shop} />
-            <Route exact path='/auth' component={Auth} />
+            <Route exact path='/login' component={Auth} />
+            <Route exact path='/register' component={Auth} />
           </Switch>
         </div>
       </div>
