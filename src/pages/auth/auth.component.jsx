@@ -5,7 +5,8 @@ import SignUp from '../../components/sign-up/sign-up.component';
 
 import './auth.styles.scss';
 
-const Auth = ({ match }) => {
+const Auth = ({match}) => {
+  console.log(match);
   return (
     <div className='auth-page'>
       {match.url === '/login' ? <SignIn /> : <SignUp />}
