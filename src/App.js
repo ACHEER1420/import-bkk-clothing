@@ -8,7 +8,7 @@ import Shop from './pages/shop/shop.component';
 import { auth, createUserProfileDocument } from './firebase/firebase.util';
 
 import { connect } from 'react-redux';
-import * as UserAction from './redux/user/user.action';
+import * as UserAction from './redux/user/user.actions';
 
 import './App.scss';
 

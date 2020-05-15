@@ -1,15 +1,19 @@
 import React from 'react';
 
+// Function
 import { auth } from '../../firebase/firebase.util';
-
-import { ReactComponent as Logo } from '../../logo.svg';
-import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
+// Component
+import { ReactComponent as Logo } from '../../logo.svg';
+import { Link } from 'react-router-dom';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+
+// Style
 import './header.style.scss';
 
-const Header = ({ currentUser, ...props }) => {
+const Header = ({ currentUser, show, ...props }) => {
   // console.log(props);
   /**
    * For the reference, even use mapStateToProps, redux will pass dispatch() as props
@@ -38,13 +42,15 @@ const Header = ({ currentUser, ...props }) => {
             </Link>
           )}
         </div>
+        <CartIcon />
+        {show ? <CartDropdown /> : null}
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ user: { currentUser } }) => {
-  return { currentUser };
+const mapStateToProps = ({ user: { currentUser }, cart: { show } }) => {
+  return { currentUser, show };
 };
 
 export default connect(mapStateToProps)(Header);
