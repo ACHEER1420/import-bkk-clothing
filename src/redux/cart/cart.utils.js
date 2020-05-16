@@ -23,5 +23,29 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 };
 
 export const removeItemFromCart = (cartItems, id) => {
+  return cartItems.filter((item) => item.id !== id);
+};
 
+export const incItemQuantity = (cartItem, id) => {
+  return cartItem.map((item) => {
+    if (item.id === id) {
+      return {
+        ...item,
+        quantity: item.quantity + 1,
+      };
+    }
+    return item;
+  });
+};
+
+export const decItemQuantity = (cartItem, id) => {
+  return cartItem.map((item) => {
+    if (item.id === id) {
+      return {
+        ...item,
+        quantity: item.quantity - 1,
+      };
+    }
+    return item;
+  });
 };

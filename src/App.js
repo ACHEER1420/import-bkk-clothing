@@ -1,15 +1,21 @@
 import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
 
+// Component
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './components/header/header.component';
 import HomePage from './pages/homepage/homepage.component';
 import Auth from './pages/auth/auth.component';
 import Shop from './pages/shop/shop.component';
-import { auth, createUserProfileDocument } from './firebase/firebase.util';
+import Checkout from './pages/checkout/checkout.component';
 
+// Function
+import { setCurrentUser } from './redux/user/user.actions';
 import { connect } from 'react-redux';
-import * as UserAction from './redux/user/user.actions';
+import { auth, createUserProfileDocument } from './firebase/firebase.util';
+import { selectCurrentUser } from './redux/user/user.selector';
+import { createStructuredSelector } from 'reselect';
 
+// Style
 import './App.scss';
 
 class App extends React.Component {
@@ -18,6 +24,8 @@ class App extends React.Component {
   componentDidMount() {
     // receive setCurrentUser mapDispatchToProp that is an function,
     // will dispatch correct action which is setCurrentUser setted in user.action.js
+
+    console.log(this.props);
 
     const { setCurrentUser } = this.props;
 
@@ -54,17 +62,26 @@ class App extends React.Component {
             <Route
               exact
               path='/login'
-              render={({match}) =>
-                this.props.currentUser ? <Redirect to='/' /> : <Auth match={match}/>
+              render={({ match }) =>
+                this.props.currentUser ? (
+                  <Redirect to='/' />
+                ) : (
+                  <Auth match={match} />
+                )
               }
             />
             <Route
               exact
               path='/register'
-              render={({match}) =>
-                this.props.currentUser ? <Redirect to='/' /> : <Auth match={match}/>
+              render={({ match }) =>
+                this.props.currentUser ? (
+                  <Redirect to='/' />
+                ) : (
+                  <Auth match={match} />
+                )
               }
             />
+            <Route exact path='/checkout' component={Checkout} />
           </Switch>
         </div>
       </div>
@@ -73,10 +90,13 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(UserAction.setCurrentUser(user)),
+  dispatch,
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
-const mapStateToProps = (state) => ({ currentUser: state.user.currentUser });
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
 // const mapStateToProps = ({user}) => ({ currentUser: user.currentUser });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

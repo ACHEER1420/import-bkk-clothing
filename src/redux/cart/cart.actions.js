@@ -11,5 +11,15 @@ export const addItem = (item) => ({
 
 export const removeItem = (id) => ({
   type: CartActionTypes.REMOVE_ITEM,
-  payload: id
-})
+  payload: id,
+});
+
+export const incQuantity = (id) => ({
+  type: CartActionTypes.INC_ITEM_QUANTITY,
+  payload: id,
+});
+
+export const decQuantity = (id) => ({
+  type: CartActionTypes.DEC_ITEM_QUANTITY,
+  payload: id,
+});

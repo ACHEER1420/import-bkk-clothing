@@ -3,6 +3,9 @@ import React from 'react';
 // Function
 import { auth } from '../../firebase/firebase.util';
 import { connect } from 'react-redux';
+import { selectCurrentUser } from '../../redux/user/user.selector';
+import { selectCartShow } from '../../redux/cart/cart.selector';
+import { createStructuredSelector } from 'reselect';
 
 // Component
 import { ReactComponent as Logo } from '../../logo.svg';
@@ -49,8 +52,9 @@ const Header = ({ currentUser, show, ...props }) => {
   );
 };
 
-const mapStateToProps = ({ user: { currentUser }, cart: { show } }) => {
-  return { currentUser, show };
-};
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  show: selectCartShow,
+});
 
 export default connect(mapStateToProps)(Header);
