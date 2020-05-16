@@ -5,6 +5,7 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
 
   // If adding existing item
   if (existingCartItem) {
+    // return newItems[] with updated qty
     return cartItems.map((cartItem) => {
       if (cartItem.id === cartItemToAdd.id) {
         return {
