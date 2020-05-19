@@ -58,7 +58,7 @@ class App extends React.Component {
         <div className='app-wrapper'>
           <Switch>
             <Route exact path='/' component={HomePage} />
-            <Route exact path='/shop' component={Shop} />
+            <Route path='/shop' component={Shop} />
             <Route
               exact
               path='/login'
