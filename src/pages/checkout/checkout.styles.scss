@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto 0;
+  margin: 50px auto 50px;
 
   .checkout-header {
     width: 100%;
@@ -27,5 +27,14 @@
     margin-top: 30px;
     margin-left: auto;
     font-size: 36px;
+  }
+
+  .testing-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    color: red;
+    font-size: 30px;
   }
 }
