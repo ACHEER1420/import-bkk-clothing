@@ -11,7 +11,10 @@ import Checkout from './pages/checkout/checkout.component';
 // Function
 import { setCurrentUser } from './redux/user/user.actions';
 import { connect } from 'react-redux';
-import { auth, createUserProfileDocument } from './firebase/firebase.util';
+import {
+  auth,
+  createUserProfileDocument,
+} from './firebase/firebase.util';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 
@@ -24,9 +27,6 @@ class App extends React.Component {
   componentDidMount() {
     // receive setCurrentUser mapDispatchToProp that is an function,
     // will dispatch correct action which is setCurrentUser setted in user.action.js
-
-    console.log(this.props);
-
     const { setCurrentUser } = this.props;
 
     // check weather or not user arleady signin ?
@@ -95,7 +95,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
+  currentUser: selectCurrentUser
 });
 // const mapStateToProps = ({user}) => ({ currentUser: user.currentUser });
 
