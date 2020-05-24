@@ -1,3 +1,4 @@
+// Will not use this anymore
 const SHOP_DATA = {
   hats: {
     id: 1,
