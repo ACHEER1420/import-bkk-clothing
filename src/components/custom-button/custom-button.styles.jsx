@@ -35,6 +35,7 @@ const defaultStyleButton = css`
 `;
 
 const displayStyleOnProps = (props) => {
+  console.log(props)
   switch (true) {
     case props.googleSignIn:
       return googleStyleButton;
