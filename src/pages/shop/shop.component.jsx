@@ -28,6 +28,21 @@ class Shop extends React.Component {
 
     const collectionRef = firestore.collection('collections');
 
+    // API call with Promise
+    // fetch(
+    //   `https://firestore.googleapis.com/v1/projects/supreme-bkk/databases/(default)/documents/collections`
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data));
+
+    // Promise
+    // collectionRef.get().then((snapshot) => {
+    //   const collectionMap = convertCollectionsSnapshotToMap(snapshot);
+    //   updateCollections(collectionMap);
+    //   this.setState({ loading: false });
+    // });
+
+    // Observable
     this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
       async (snapshot) => {
         const collectionMap = convertCollectionsSnapshotToMap(snapshot);
