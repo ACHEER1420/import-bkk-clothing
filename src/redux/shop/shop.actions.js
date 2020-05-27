@@ -18,7 +18,11 @@ export const fetchCollectionFailure = (errorMessage) => ({
   payload: errorMessage,
 });
 
-export const fetchCollectionStratAsync = () => {
+/**
+ * Keep fetchCollectionStartAsync to be a reference
+ * shows how to use Redux Thunk
+ */
+export const fetchCollectionStartAsync = () => {
   return (dispatch) => {
     dispatch(fetchCollectionStart());
 
