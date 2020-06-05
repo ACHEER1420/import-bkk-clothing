@@ -9,7 +9,6 @@ import Shop from './pages/shop/shop.component';
 import Checkout from './pages/checkout/checkout.component';
 
 // Function
-import { setCurrentUser } from './redux/user/user.actions';
 import { connect } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
@@ -89,7 +88,6 @@ class App extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   dispatch,
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
 const mapStateToProps = createStructuredSelector({
