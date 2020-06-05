@@ -11,10 +11,6 @@ import Checkout from './pages/checkout/checkout.component';
 // Function
 import { setCurrentUser } from './redux/user/user.actions';
 import { connect } from 'react-redux';
-import {
-  auth,
-  createUserProfileDocument,
-} from './firebase/firebase.util';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
 
@@ -27,24 +23,26 @@ class App extends React.Component {
   componentDidMount() {
     // receive setCurrentUser mapDispatchToProp that is an function,
     // will dispatch correct action which is setCurrentUser setted in user.action.js
-    const { setCurrentUser } = this.props;
+    // const { setCurrentUser } = this.props;
 
     // check weather or not user arleady signin ?
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        try {
-          const snapShot = await userRef.get();
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-        } catch (error) {}
-      } else {
-        console.log('check when else of component did mount will be fired');
-        setCurrentUser(userAuth);
-      }
-    });
+    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
+    //     try {
+    //       const snapShot = await userRef.get();
+    //       setCurrentUser({
+    //         id: snapShot.id,
+    //         ...snapShot.data(),
+    //       });
+    //     } catch (error) {}
+    //   } else {
+    //     console.log('check when else of component did mount will be fired');
+    //     setCurrentUser(userAuth);
+    //   }
+    // });
+
+
   }
 
   componentWillUnmount() {
