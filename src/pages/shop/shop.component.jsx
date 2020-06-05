@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 import CollectionPageContainer from '../../pages/collection/collection.container';
 
-// Functions
+// Functions from actions not saga, saga will listen to this action too
 import { fetchCollectionStart } from '../../redux/shop/shop.actions';
 import { connect } from 'react-redux';
 

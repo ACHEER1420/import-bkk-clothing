@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 
 import {
   firestore,
@@ -21,7 +21,10 @@ export function* shopSagaFetchCollectionAsync() {
 
 export function* shopSagaFetchCollectionStart() {
   // takeEvery() => create a non-blocking call
-  yield takeEvery(
+
+  // Our SAGA FetchCollection is listening to 
+  // FETCH_COLLECTION_START action from reducer
+  yield takeLatest(
     shopActionTypes.FETCH_COLLECTION_START,
     shopSagaFetchCollectionAsync
   );
