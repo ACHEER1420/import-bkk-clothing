@@ -14,6 +14,8 @@ const config = {
   appId: '1:1017509859861:web:949348048873318233b41c',
 };
 
+firebase.initializeApp(config);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -69,7 +71,19 @@ export const convertCollectionsSnapshotToMap = (collections) => {
   }, {});
 };
 
-firebase.initializeApp(config);
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      (error) => {
+        reject(error);
+      }
+    );
+  });
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

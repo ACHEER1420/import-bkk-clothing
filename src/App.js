@@ -12,6 +12,7 @@ import Checkout from './pages/checkout/checkout.component';
 import { connect } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selector';
 import { createStructuredSelector } from 'reselect';
+import { checkUserSession } from './redux/user/user.actions';
 
 // Style
 import './App.scss';
@@ -20,28 +21,9 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    // receive setCurrentUser mapDispatchToProp that is an function,
-    // will dispatch correct action which is setCurrentUser setted in user.action.js
-    // const { setCurrentUser } = this.props;
-
-    // check weather or not user arleady signin ?
-    // this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     try {
-    //       const snapShot = await userRef.get();
-    //       setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data(),
-    //       });
-    //     } catch (error) {}
-    //   } else {
-    //     console.log('check when else of component did mount will be fired');
-    //     setCurrentUser(userAuth);
-    //   }
+    const { checkUserSession } = this.props;
+    checkUserSession();
     // });
-
-
   }
 
   componentWillUnmount() {
@@ -87,11 +69,11 @@ class App extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatch,
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 // const mapStateToProps = ({user}) => ({ currentUser: user.currentUser });
 
