@@ -17,12 +17,33 @@
     }
   }
 
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+
+    &:hover {
+      .image {
+        opacity: unset;
+      }
+  
+      .custom-button {
+        opacity: unset;
+      }
+    }
+  }
+
   .custom-button {
     width: 80%;
     opacity: 0.7;
     display: none;
     position: absolute;
     top: 255px;
+
+    @media screen and (max-width: 800px) {
+      display: block;
+      opacity: 0.9;
+      min-width: unset;
+      padding: 0px 10px;
+    }
   }
 
   .background-image {

@@ -15,7 +15,7 @@ import { createStructuredSelector } from 'reselect';
 import { checkUserSession } from './redux/user/user.actions';
 
 // Style
-import './App.scss';
+import { GlobalStyle } from './global.styles';
 
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
@@ -23,7 +23,8 @@ const App = ({ checkUserSession, currentUser }) => {
   }, [checkUserSession]);
 
   return (
-    <div className='App'>
+    <div class='App'>
+      <GlobalStyle />
       <Header />
       <div className='app-wrapper'>
         <Switch>

@@ -8,12 +8,14 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
-  top: 0px;
-  left: 0px;
   text-transform: uppercase;
-  z-index: 5;
   background-color: white;
+
+  @media screen and (max-width: 800px) {
+    height: 60px;
+    padding: 10px;
+    margin: 20px 0px;
+  }
 `;
 
 export const LogoContainer = styled(Link)`
@@ -30,7 +32,10 @@ export const OptionsContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 30px;
+
+  @media screen and (max-width: 800px) {
+    width: 80%;
+  }
 `;
 
 export const OptionContainerStyles = css`
