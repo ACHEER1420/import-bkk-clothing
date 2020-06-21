@@ -4,12 +4,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const compression = require('compression');
 
 // create express nodejs application
 const app = express();
 
 // define port number
 const port = process.env.PORT || 5000;
+
+// Using compression Middleware
+// To solve Heroku Gzipping problem
+app.use(compression());
 
 // Using body-parser Middleware
 // Make sure we convert all data sent to route to json format
