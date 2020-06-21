@@ -23,7 +23,7 @@ const App = ({ checkUserSession, currentUser }) => {
   }, [checkUserSession]);
 
   return (
-    <div class='App'>
+    <div className='App'>
       <GlobalStyle />
       <Header />
       <div className='app-wrapper'>
