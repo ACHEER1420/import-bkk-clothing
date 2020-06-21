@@ -4,6 +4,7 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './components/header/header.component';
 import Spinner from './components/spinner/spinner.component';
+import ErrorBoundary from './components/error-boundary/error-boundary.component';
 
 // Function
 import { connect } from 'react-redux';
@@ -30,25 +31,27 @@ const App = ({ checkUserSession, currentUser }) => {
       <Header />
       <div className='app-wrapper'>
         <Switch>
-          <Suspense fallback={<Spinner />}>
-            <Route exact path='/' component={Homepage} />
-            <Route path='/shop' component={Shop} />
-            <Route
-              exact
-              path='/login'
-              render={({ match }) =>
-                currentUser ? <Redirect to='/' /> : <Auth match={match} />
-              }
-            />
-            <Route
-              exact
-              path='/register'
-              render={({ match }) =>
-                currentUser ? <Redirect to='/' /> : <Auth match={match} />
-              }
-            />
-            <Route exact path='/checkout' component={Checkout} />
-          </Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<Spinner />}>
+              <Route exact path='/' component={Homepage} />
+              <Route path='/shop' component={Shop} />
+              <Route
+                exact
+                path='/login'
+                render={({ match }) =>
+                  currentUser ? <Redirect to='/' /> : <Auth match={match} />
+                }
+              />
+              <Route
+                exact
+                path='/register'
+                render={({ match }) =>
+                  currentUser ? <Redirect to='/' /> : <Auth match={match} />
+                }
+              />
+              <Route exact path='/checkout' component={Checkout} />
+            </Suspense>
+          </ErrorBoundary>
         </Switch>
       </div>
     </div>
