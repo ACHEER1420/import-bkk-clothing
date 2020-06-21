@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 
 // Component
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Header from './components/header/header.component';
-import HomePage from './pages/homepage/homepage.component';
-import Auth from './pages/auth/auth.component';
-import Shop from './pages/shop/shop.component';
-import Checkout from './pages/checkout/checkout.component';
+import Spinner from './components/spinner/spinner.component';
 
 // Function
 import { connect } from 'react-redux';
@@ -16,6 +13,11 @@ import { checkUserSession } from './redux/user/user.actions';
 
 // Style
 import { GlobalStyle } from './global.styles';
+
+const Homepage = lazy(() => import('./pages/homepage/homepage.component'));
+const Shop = lazy(() => import('./pages/shop/shop.component'));
+const Checkout = lazy(() => import('./pages/checkout/checkout.component'));
+const Auth = lazy(() => import('./pages/auth/auth.component'));
 
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
@@ -28,23 +30,25 @@ const App = ({ checkUserSession, currentUser }) => {
       <Header />
       <div className='app-wrapper'>
         <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={Shop} />
-          <Route
-            exact
-            path='/login'
-            render={({ match }) =>
-              currentUser ? <Redirect to='/' /> : <Auth match={match} />
-            }
-          />
-          <Route
-            exact
-            path='/register'
-            render={({ match }) =>
-              currentUser ? <Redirect to='/' /> : <Auth match={match} />
-            }
-          />
-          <Route exact path='/checkout' component={Checkout} />
+          <Suspense fallback={<Spinner />}>
+            <Route exact path='/' component={Homepage} />
+            <Route path='/shop' component={Shop} />
+            <Route
+              exact
+              path='/login'
+              render={({ match }) =>
+                currentUser ? <Redirect to='/' /> : <Auth match={match} />
+              }
+            />
+            <Route
+              exact
+              path='/register'
+              render={({ match }) =>
+                currentUser ? <Redirect to='/' /> : <Auth match={match} />
+              }
+            />
+            <Route exact path='/checkout' component={Checkout} />
+          </Suspense>
         </Switch>
       </div>
     </div>
