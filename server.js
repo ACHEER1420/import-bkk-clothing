@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const compression = require('compression');
+const enforce = require('express-sslify');
 
 // create express nodejs application
 const app = express();
@@ -29,6 +30,10 @@ app.use(bodyParser.json());
 // Make sure that all url that using is
 // for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Using express-sslify Middleware
+// To redirect HTTP --> HTTPS
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // Cors Middleware
 // Using it to allow api call from everywhere
@@ -57,6 +62,10 @@ app.post('/payment', (req, res) => {
       res.status(200).send({ success: stripeRes });
     }
   });
+});
+
+app.get('/service-worker.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build', 'service-worker.js'));
 });
 
 app.listen(port, (error) => {
